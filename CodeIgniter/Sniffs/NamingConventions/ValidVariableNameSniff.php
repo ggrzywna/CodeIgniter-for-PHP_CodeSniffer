@@ -178,7 +178,7 @@ class CodeIgniter_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_Co
      * must not be prefixed with an underscore. Returns true if $varName is
      * properly prefixed according to the variable visibility provided in
      * $varProps, false otherwise.
-     * 
+     *
      * @param PHP_CodeSniffer_File $phpcsFile The current file being processed.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
@@ -306,11 +306,11 @@ class CodeIgniter_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_Co
      * $stackPtr in $phpcsFile is in the head of a for loop, otherwise false.
      * The head is the code placed between parenthesis next to the key word
      * 'for' : for (<loop_head>) {<loop_body>}.
-     * 
+     *
      * @param PHP_CodeSniffer_File $phpcsFile The current file being processed.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
-     * 
+     *
      * @return int|bool Position of T_FOR if token associated with $stackPtr in
      *                  $phpcsFile is in the head of a for loop, otherwise false.
      */
@@ -419,7 +419,9 @@ class CodeIgniter_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_Co
                     if (is_array($parentPtrAndCode)) {
                         $parentCode = next($parentPtrAndCode);
                         $parentPtr = key($parentPtrAndCode);
-                        $openBracketPtr = $tokens[$parentPtr]['scope_opener'];
+                        if (isset($openBracketPtr = $tokens[$parentPtr]['scope_opener'])) {
+                            $openBracketPtr = $tokens[$parentPtr]['scope_opener'];
+                        }
                     }
                 }
             } else {
