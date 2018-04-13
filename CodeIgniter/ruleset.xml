@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ruleset name="CodeIgniter">
   <description>CodeIgniter coding standard as described at http://codeigniter.com/user_guide/general/styleguide.html.</description>
-  <rule ref="CodeIgniter.Files.ClosingLocationComment">
-    <properties>
-      <!-- End of the path pointing to your project's application root or all of it. -->
-      <property name="applicationRoot" value="/application/"/>
-    </properties>
-  </rule>
   <rule ref="Generic.Files.LineEndings">
     <properties>
       <property name="eolChar" value="\n"/>
