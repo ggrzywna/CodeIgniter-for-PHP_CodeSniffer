@@ -21,11 +21,19 @@
   <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
 
   <!-- Classes and functions should be commented -->
-  <rule ref="PEAR.Commenting.ClassComment"/>
+  <rule ref="PEAR.Commenting.ClassComment">
+      <exclude name="PEAR.Commenting.ClassComment.MissingAuthorTag"/>
+      <exclude name="PEAR.Commenting.ClassComment.MissingCategoryTag"/>
+      <exclude name="PEAR.Commenting.ClassComment.MissingLicenseTag"/>
+      <exclude name="PEAR.Commenting.ClassComment.MissingLinkTag"/>
+      <exclude name="PEAR.Commenting.ClassComment.MissingPackageTag"/>
+  </rule>
+
   <rule ref="PEAR.Commenting.FunctionComment"/>
   <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
   <!-- Use warnings for docblock comments for files and variables, since nothing is cleary explained -->
   <rule ref="PEAR.Commenting.FileComment">
+      <exclude name="PEAR.Commenting.FileComment.Missing"/>
     <properties>
       <property name="error" value="false"/>
     </properties>
