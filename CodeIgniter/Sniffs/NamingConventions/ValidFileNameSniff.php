@@ -60,8 +60,31 @@ class CodeIgniter_Sniffs_NamingConventions_ValidFileNameSniff implements PHP_Cod
         $fullPath = $phpcsFile->getFilename();
         $fileNameAndExt = basename($fullPath);
         $fileName = substr($fileNameAndExt, 0, strrpos($fileNameAndExt, '.'));
+	    // exclude migration classes from the check
+        $isMigrationClass = strpos($decName, 'Migration_') !== FALSE;
+	    if ($isMigrationClass) {
+		    $migrationFile = $fileName;
+		    $migrationFileParts = explode('_', $migrationFile, 2);
+		    $migrationFilePrefix = reset($migrationFileParts);
+		    $migrationFileBaseName = end($migrationFileParts);
 
-        if ($expectedFileName !== $fileName) {
+		    $migrationClass = $decName;
+		    $migrationClassBaseName = substr($migrationClass, strlen('Migration_'));
+
+		    if ($migrationClassBaseName !== $migrationFileBaseName) {
+			    $phpcsFile->addError("Migration file name: '{$migrationFileBaseName}' differs from the migration class name: '{$migrationClassBaseName }'.", 0);
+		    }
+
+		    if ($migrationClass !== 'Migration_' . $migrationClassBaseName) {
+			    $phpcsFile->addError('Migration class name should be prefixed with "Migration_".', 0);
+		    }
+
+		    if ( ! is_numeric($migrationFilePrefix)) {
+			    $phpcsFile->addError('Migration file prefix is not a number.', 0);
+		    }
+	    }
+
+        if ( ! $isMigrationClass && $expectedFileName !== $fileName) {
             $errorTemplate = 'Filename "%s" doesn\'t match the name of the %s that it contains "%s" in Ucfirst-like manner. "%s" was expected.';
             $errorMessage = sprintf(
                 $errorTemplate,
