@@ -93,6 +93,10 @@ class CodeIgniter_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_Co
         if (0 === strcmp($varName, 'this')) {
             return;
         }
+	    //skip global variables
+	    if (in_array($varName, ['_FILES', '_POST', '_GET'])) {
+		    return;
+	    }
         // check(s)
         if ( ! $this->checkLowerCase($phpcsFile, $stackPtr, $varName)) {
             return;
