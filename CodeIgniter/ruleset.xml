@@ -30,7 +30,9 @@
   </rule>
 
   <rule ref="PEAR.Commenting.FunctionComment"/>
-  <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+  <rule ref="Squiz.Commenting.FunctionCommentThrowTag">
+    <exclude name="Squiz.Commenting.FunctionCommentThrowTag.WrongNumber"/>
+  </rule>
   <!-- Use warnings for docblock comments for files and variables, since nothing is cleary explained -->
   <rule ref="PEAR.Commenting.FileComment">
     <exclude name="PEAR.Commenting.FileComment.Missing"/>
